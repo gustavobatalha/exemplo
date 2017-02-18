@@ -1,29 +1,37 @@
 import { Injectable } from '@angular/core'
+import {RESTClient, BaseUrl, DefaultHeaders, Produces, GET, DELETE, POST, PUT, Path, Body, } from 'ng2-http'
+import {Http} from '@angular/http'
+import {Observable} from 'rxjs/Observable';
+
 
 @Injectable()
-export class TarefaService{
-    private itens: Tarefa[] = [
-        {title: 'Item 1', checked:false},
-        {title: 'Item 2', checked:false},
-        {title: 'Item 3', checked:false}
-    ];
+@DefaultHeaders({
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+})
+@BaseUrl('http://localhost:3000/tarefas')
+export class TarefaService extends RESTClient{
 
-    getItens(){
-        return this.itens;
-    }
-    addTarefa(tarefa: Tarefa){
-        this.itens.push(tarefa);
-    }
+    constructor(http:Http){ super(http)}
 
-    removerTarefa(tarefa: Tarefa){
-        let i = this.itens.indexOf(tarefa);
-        if(i > -1){
-            this.itens.splice(i,1);
-        }
-    }
+    @GET('/')
+    @Produces<Tarefa[]>()
+    get(): Observable<Tarefa[]> {return null;}
+
+    @DELETE('/{id}')
+    remove( @Path('id') id: number ):Observable<any> {return null;}
+
+    @POST('/')
+    @Produces<Tarefa>()
+    add( @Body tarefa: Tarefa ):Observable<Tarefa>{return null}
+
+    @PUT('/{id}')
+    @Produces<Tarefa>()
+    update( @Path('id') id: number, @Body tarefa: Tarefa):Observable<Tarefa>{ return null }
 }
 
 export interface Tarefa{
+    id?: number,
     title: string
     checked: boolean
 }

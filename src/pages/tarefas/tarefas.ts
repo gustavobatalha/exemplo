@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Tarefa, TarefaService } from '../../services/tarefa.service'
 import { AlertController } from 'ionic-angular'
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'page-tarefas',
@@ -10,16 +11,17 @@ import { AlertController } from 'ionic-angular'
 })
 export class TarefasPage {
   
-  items: Tarefa[];
+  items: Observable<Tarefa[]>;
 
   constructor(private tarefaService: TarefaService, public alertCtrl: AlertController) {
-    this.items = tarefaService.getItens();
+    this.items = tarefaService.get();
 
   }
 
-  itemTapped(event, item) {
+  itemTapped(tarefa) {
     
-    item.checked = !item.checked;
+    tarefa.checked = !tarefa.checked;
+    this.tarefaService.update(tarefa.id, tarefa).subscribe();
     
   }
 
@@ -32,12 +34,19 @@ export class TarefasPage {
         {
           text:"Salvar",
           handler: data => {
-            this.tarefaService.addTarefa({title: data.tarefa, checked:false}) ;
-            this.items = this.tarefaService.getItens();
+            this.tarefaService.add({title: data.tarefa, checked:false})
+              .subscribe(()=> this.items = this.tarefaService.get());
+            
           }
         }
       ]
     });
     prompt.present();
+  }
+
+  removerTarefa(ev, tarefa: Tarefa){
+    this.tarefaService.remove(tarefa.id)
+      .subscribe(()=> this.items = this.tarefaService.get());
+    ev.stopPropagation();      
   }
 }
