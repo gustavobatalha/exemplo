@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalhe do Produto</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-card>    
+      <ion-card-content>
+          <ion-card-title [ngStyle]="{'text-decoration': tarefa.checked ? 'line-through' : 'none' }">
+            {{ tarefa.title }}
+            <br/>
+            <div style="text-align: center">
+                <img [src]="tarefa.foto" *ngIf="tarefa.foto" style="max-width: 150px;display: inline-block">
+            </div>
+          </ion-card-title>
+          <ion-row no-padding>
+              <ion-col>
+                  <button ion-button clear small (click)="marcar()" icon-left>
+                      <ion-icon name="start"></ion-icon> {{tarefa.checked?'Des':''}}marca
+                    </button>
+              </ion-col>
+              <ion-col>
+                  <button ion-button clear small (click)="tirarFoto()" icon-left color="secondary">
+                      <ion-icon name="camera"></ion-icon> Foto
+                    </button>
+              </ion-col>
+              <ion-col text-right>
+                  <button ion-button clear small (click)="excluir()" icon-left color="danger">
+                      <ion-icon name="trash"></ion-icon> Excluir
+                    </button>
+              </ion-col>
+          </ion-row>
+      </ion-card-content>
+  </ion-card>    
+
+
+</ion-content>

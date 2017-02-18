@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Tarefa, TarefaService } from '../../services/tarefa.service'
 import { AlertController } from 'ionic-angular'
 import {Observable} from 'rxjs/Observable';
+import {DetalhePage} from '../detalhe/detalhe'
 
 @Component({
   selector: 'page-tarefas',
@@ -13,9 +14,15 @@ export class TarefasPage {
   
   items: Observable<Tarefa[]>;
 
-  constructor(private tarefaService: TarefaService, public alertCtrl: AlertController) {
-    this.items = tarefaService.get();
+  constructor(private tarefaService: TarefaService, 
+              public alertCtrl: AlertController,
+              public navCtrl: NavController) {
+    
 
+  }
+
+  ionViewWillEnter(){
+    this.items = this.tarefaService.get();
   }
 
   itemTapped(tarefa) {
@@ -47,6 +54,12 @@ export class TarefasPage {
   removerTarefa(ev, tarefa: Tarefa){
     this.tarefaService.remove(tarefa.id)
       .subscribe(()=> this.items = this.tarefaService.get());
+    ev.stopPropagation();      
+  }
+
+  detalhe(ev, tarefa: Tarefa){
+    
+    this.navCtrl.push(DetalhePage, {tarefa: tarefa});
     ev.stopPropagation();      
   }
 }

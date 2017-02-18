@@ -9,7 +9,7 @@ import {Observable} from 'rxjs/Observable';
     'Accept': 'application/json',
     'Content-Type': 'application/json'
 })
-@BaseUrl('http://localhost:3000/tarefas')
+@BaseUrl('http://192.168.207.89:3000/tarefas')
 export class TarefaService extends RESTClient{
 
     constructor(http:Http){ super(http)}
@@ -33,5 +33,7 @@ export class TarefaService extends RESTClient{
 export interface Tarefa{
     id?: number,
     title: string
-    checked: boolean
+    checked: boolean,
+    foto?: string
+
 }
