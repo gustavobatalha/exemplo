@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Login Google</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  
+  <button ion-button (click)="logar()">Logar</button>
+  <button ion-button (click)="sair()">Sair</button>
+
+  <br>
+  <br>
+  <pre>{{perfil |json}}</pre>
+
+  <img *ngIf="perfil?.imagemUrl" [src]="perfil?.imagemUrl">
+  <span>{{perfil?.displayName}}</span>
+</ion-content>

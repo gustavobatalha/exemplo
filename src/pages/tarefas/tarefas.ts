@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { Tarefa, TarefaService } from '../../services/tarefa.service'
 import { AlertController } from 'ionic-angular'
 import {Observable} from 'rxjs/Observable';

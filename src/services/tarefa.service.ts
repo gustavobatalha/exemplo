@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import {RESTClient, BaseUrl, DefaultHeaders, Produces, GET, DELETE, POST, PUT, Path, Body, } from 'ng2-http'
+import {RESTClient, BaseUrl, DefaultHeaders, Produces, GET, DELETE, POST, PUT, Path, Body } from 'ng2-http'
 import {Http} from '@angular/http'
 import {Observable} from 'rxjs/Observable';
 

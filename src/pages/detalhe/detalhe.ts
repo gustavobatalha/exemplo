@@ -32,7 +32,7 @@ export class DetalhePage{
             destinationType: Camera.DestinationType.DATA_URL,
             targetHeight: 150,
             targetWidth: 150,
-            sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM
+            sourceType: Camera.PictureSourceType.CAMERA
 
         }).then(imageData => {
             this.tarefa.foto = "data:image/jpeg;base64," + imageData;
